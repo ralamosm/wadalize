@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "wadalize"
-version = "0.1.0"
+version = "0.1.1"
 description = "Class and script allowing to manipulate WADL files"
 authors = ["Roberto Alamos <ralamosm@gmail.com>"]
 readme = "README.md"

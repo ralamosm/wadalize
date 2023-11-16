@@ -74,14 +74,14 @@ def test_wrong_element_no_name_no_style():
         WADLParam(param)
 
 
-def test_ok_dump_as_json():
+def test_ok_dump_as_dict():
     param = etree.XML(
         '<param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:double" \
             style="query" name="foo" default="bar" />'
     )
     wp = WADLParam(param)
 
-    assert wp.dump_as_json() == dict(name="foo", style="query", value="bar", type="xs:double")
+    assert wp.dump_as_dict() == dict(name="foo", style="query", value="bar", type="xs:double")
 
 
 def test_eq_comparison():

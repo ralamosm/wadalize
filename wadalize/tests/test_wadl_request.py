@@ -36,7 +36,7 @@ def test_ok_params():
     assert len(wr.params) == 3
 
 
-def test_dump_as_json():
+def test_dump_as_dict():
     params = []
     params.append(
         etree.XML(
@@ -58,7 +58,7 @@ def test_dump_as_json():
     )
 
     wr = WADLRequest("https://example.com/api/yolo", "POST", params=params)
-    jr = wr.dump_as_json()
+    jr = wr.dump_as_dict()
 
     assert jr["location"] == wr.location
     assert jr["method"] == wr.method

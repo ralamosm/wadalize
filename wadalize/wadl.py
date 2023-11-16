@@ -290,10 +290,10 @@ class WADLRequest:
     def dump_as_har(self):
         raise NotImplementedError("HAR output is not yet implemented")
 
-    def dump_as_json(self):
+    def dump_as_dict(self):
         """Dumps current request as a simple dict composed of keys
         location (the url), method and params"""
-        return dict(location=self.location, method=self.method, params=[p.dump_as_json() for p in self.params])
+        return dict(location=self.location, method=self.method, params=[p.dump_as_dict() for p in self.params])
 
     def dump_as_request(self):
         """
@@ -380,7 +380,7 @@ class WADLParam:
         self.style = param_el.get("style") or "string"
         self.value = default_values.get(self.name) or param_el.get("default")  # default_values takes precedence over default param
 
-    def dump_as_json(self):
+    def dump_as_dict(self):
         """Dump param as a simple dict composed of keys name, type, style and
         value"""
         return dict(name=self.name, type=self.type, style=self.style, value=self.value)
