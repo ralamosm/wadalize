@@ -2,7 +2,7 @@
 
 Class and script allowing to manipulate [WADL](https://es.wikipedia.org/wiki/Web_Application_Description_Language) files.
 
-## Class Usage
+## wadalize as a class
 
 ```python
 from wadalize import WADLHandler
@@ -20,14 +20,14 @@ for wr in wh.requests:
     # output or smth...
 ```
 
-# Cli usage
+## wadalize as a cli
 
 `wadalize` is an script capable of processing a WADL source to dump its list of params or run the requests. The script works
 by receiving a WADL source (a local file or a url) and executing the corresponding action. **Its main goal is
 to help process a WADL source, quickly do mass-assignment for param names and then run the requests so I can
 get a quick look at how the API described by the WADL source works**.
 
-## Help
+### Help
 
 ```console
 $ wadalize --help
@@ -70,7 +70,7 @@ Options:
   --help                    Show this message and exit.
 ```
 
-## Description
+### Description
 
 As explained above, `--dump-params` simply returns the list of all params used on the WADL source, without
 differentiating the call where they may appear. Actually, if you think about it, the same param name may mean
@@ -82,7 +82,7 @@ Getting this list of params helps when later using the `--use-file` option.
 If you don't use `--dump-params` then the file is processed in order to execute each and every request contained
 in the WADL source.
 
-## Usage Examples
+### Usage Examples
 
 Dump the list of params of a WADL url
 
