@@ -144,10 +144,10 @@ def test_dump_params_url(mock_get):
 
     for args_list in mock_get.call_args_list:
         _, kwargs = args_list
-        if "proxies" in kwargs:
-            kwargs.pop("proxies")
+        if "verify" in kwargs:
+            kwargs.pop("verify")
 
-    assert mock.call("https://example.com/api/application.wadl", verify=False, allow_redirects=False) in mock_get.call_args_list
+    assert mock.call("https://example.com/api/application.wadl", allow_redirects=False) in mock_get.call_args_list
 
 
 @mock.patch("requests.request", side_effect=mocked_requests_request)
@@ -184,14 +184,13 @@ def test_ok_run_requests_no_filename(mock_request):
 
         for args_list in mock_request.call_args_list:
             _, kwargs = args_list
-            if "proxies" in kwargs:
-                kwargs.pop("proxies")
+            if "verify" in kwargs:
+                kwargs.pop("verify")
 
         assert (
             mock.call(
                 "POST",
                 "https://example.com/api/v1/affiliate/v1/categories/tree",
-                verify=False,
                 headers={"Content-Type": "application/json", "x-yolo1": "header1", "x-yolo2": "header2"},
             )
             in mock_request.call_args_list
@@ -200,7 +199,6 @@ def test_ok_run_requests_no_filename(mock_request):
             mock.call(
                 "GET",
                 "https://example.com/api/v1/affiliate/v1/search/items?q=test&property=",
-                verify=False,
                 headers={"x-yolo1": "header1", "x-yolo2": "header2"},
             )
             in mock_request.call_args_list
@@ -209,7 +207,6 @@ def test_ok_run_requests_no_filename(mock_request):
             mock.call(
                 "GET",
                 "https://example.com/api/v1/access/run?resource=accounts&domain=condorito",
-                verify=False,
                 headers={"principal": "main", "x-yolo1": "header1", "x-yolo2": "header2"},
             )
             in mock_request.call_args_list
@@ -237,14 +234,13 @@ def test_ok_run_requests_with_filename(mock_request):
 
         for args_list in mock_request.call_args_list:
             _, kwargs = args_list
-            if "proxies" in kwargs:
-                kwargs.pop("proxies")
+            if "verify" in kwargs:
+                kwargs.pop("verify")
 
         assert (
             mock.call(
                 "POST",
                 "https://example.com/api/v1/affiliate/v1/categories/tree",
-                verify=False,
                 headers={"Content-Type": "application/json", "x-yolo1": "header1", "x-yolo2": "header2"},
             )
             in mock_request.call_args_list
@@ -253,7 +249,6 @@ def test_ok_run_requests_with_filename(mock_request):
             mock.call(
                 "GET",
                 "https://example.com/api/v1/affiliate/v1/search/items?q=test_file&property=",
-                verify=False,
                 headers={"x-yolo1": "header1", "x-yolo2": "header2"},
             )
             in mock_request.call_args_list
@@ -262,7 +257,6 @@ def test_ok_run_requests_with_filename(mock_request):
             mock.call(
                 "GET",
                 "https://example.com/api/v1/access/delete?resource=shop&domain=example.com",
-                verify=False,
                 headers={"principal": "one", "x-yolo1": "header1", "x-yolo2": "header2"},
             )
             in mock_request.call_args_list
@@ -307,14 +301,13 @@ def test_ok_run_requests_with_filename_cli_precedence(mock_request):
 
         for args_list in mock_request.call_args_list:
             _, kwargs = args_list
-            if "proxies" in kwargs:
-                kwargs.pop("proxies")
+            if "verify" in kwargs:
+                kwargs.pop("verify")
 
         assert (
             mock.call(
                 "POST",
                 "https://example.com/api/v1/affiliate/v1/categories/tree",
-                verify=False,
                 headers={"Content-Type": "application/json", "x-yolo1": "header1", "x-yolo2": "header2"},
             )
             in mock_request.call_args_list
@@ -323,7 +316,6 @@ def test_ok_run_requests_with_filename_cli_precedence(mock_request):
             mock.call(
                 "GET",
                 "https://example.com/api/v1/affiliate/v1/search/items?q=cli_q&property=",
-                verify=False,
                 headers={"x-yolo1": "header1", "x-yolo2": "header2"},
             )
             in mock_request.call_args_list
@@ -332,7 +324,6 @@ def test_ok_run_requests_with_filename_cli_precedence(mock_request):
             mock.call(
                 "GET",
                 "https://example.com/api/v1/access/cli_action?resource=shop&domain=example.com",
-                verify=False,
                 headers={"principal": "one", "x-yolo1": "header1", "x-yolo2": "header2"},
             )
             in mock_request.call_args_list
