@@ -27,7 +27,9 @@ class WADLHandler:
         _requests attribute.
     """
 
-    def __init__(self, from_string=None, base=None, default_values={}):
+    def __init__(self, from_string=None, base=None, default_values=None):
+        if default_values is None:
+            default_values = {}
         if not from_string:
             raise ValueError("You need to pass a WADL string to be parsed")
 
@@ -277,9 +279,13 @@ class WADLRequest:
             place of params found in the WADL file.
     """
 
-    def __init__(self, location, method, params=None, headers={}, default_values={}):
+    def __init__(self, location, method, params=None, headers=None, default_values=None):
         if params is None:
             params = []
+        if headers is None:
+            headers = []
+        if default_values is None:
+            default_values = {}
 
         self.location = location
         self.method = method
@@ -370,7 +376,9 @@ class WADLParam:
                      value of the "default" attribute of the <param> element
     """
 
-    def __init__(self, param_el, default_values={}):
+    def __init__(self, param_el, default_values=None):
+        if default_values is None:
+            default_values = {}
         if not param_el.get("name") or not param_el.get("style"):
             if param_el.get("name", "") != "javax.ws.rs.container.Suspended":
                 raise ValueError("Attributes name and style are required")

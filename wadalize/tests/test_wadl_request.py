@@ -113,14 +113,10 @@ def test_dump_as_request():
 
     wr = WADLRequest("https://example.com/api/yolo", "POST", params=params)
     r = wr.dump_as_request()
-    print(r)
-    print(r.headers)
-    print(r.query)
     assert isinstance(r, Request)
     assert str(r.url) == "https://example.com/api/yolo?foo2=&foo3="
     assert r.method == "POST"
     assert len(r.headers.keys()) == 1
-    print(r.query)
     assert len(r.query.keys()) == 2
 
 

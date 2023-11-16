@@ -1,3 +1,4 @@
+import os
 import sys
 
 import click
@@ -67,7 +68,11 @@ def run_requests(wadl_string, base, headers, default_values, query_params, deny_
         req.params.update(query_params)
 
         # run request!
-        requests.request(req.method, str(req.url), verify=False, headers=req.headers)
+        kwargs = {"headers": req.headers}
+        if os.getenv("HTTP_PROXY") or os.getenv("HTTPS_PROXY"):
+            # let's avoid any unwanted problems
+            kwargs["verify"] = False
+        requests.request(req.method, str(req.url), **kwargs)
         click.echo("METHOD: {}, URL: {}, HEADERS: {}".format(wr.method, wr.location, wr.headers))
 
 
